@@ -21,6 +21,7 @@ import {
   Twitter,
   Linkedin,
   Github,
+  Code,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -36,6 +37,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Separator } from "@/components/ui/separator"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface BinData {
   number: string
@@ -97,7 +99,7 @@ export default function Home() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/bin?bin=${bin}`)
+      const response = await fetch(`https://binsapi.vercel.app/api/bin?bin=${bin}`)
 
       if (!response.ok) {
         throw new Error("Failed to fetch bin data")
@@ -148,7 +150,7 @@ export default function Home() {
     setBulkError(null)
 
     try {
-      const response = await fetch("/api/bulk-bin", {
+      const response = await fetch("https://binsapi.vercel.app/api/bulk-bin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -321,6 +323,12 @@ Checked with BIN Checker Pro`
             <span className="font-bold text-xl">BIN Checker Pro</span>
           </div>
           <nav className="flex items-center space-x-4">
+            <Link href="/api/docs">
+              <Button variant="ghost" className="gap-2">
+                <Code className="h-4 w-4" />
+                <span className="hidden md:inline">API Docs</span>
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="icon"
@@ -760,6 +768,38 @@ Checked with BIN Checker Pro`
           </Accordion>
         </div>
 
+        <div className="max-w-4xl mx-auto mb-12">
+          <Card className="border-2 bg-primary/5">
+            <CardHeader>
+              <CardTitle className="text-xl flex items-center">
+                <Code className="h-5 w-5 mr-2" />
+                API Access
+              </CardTitle>
+              <CardDescription>Integrate our BIN database directly into your applications</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-6 md:grid-cols-2">
+              <div>
+                <h3 className="text-lg font-medium mb-2">Public API</h3>
+                <p className="text-muted-foreground mb-4">
+                  We now offer a free public API for basic BIN lookups. Perfect for developers who need to integrate BIN
+                  checking into their applications.
+                </p>
+                <div className="bg-muted p-3 rounded-md font-mono text-xs overflow-x-auto">
+                  GET https://binsapi.vercel.app/api/bin?bin=411111
+                </div>
+              </div>
+              <div className="flex flex-col justify-center">
+                <Link href="/api/docs">
+                  <Button className="w-full md:w-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
+                    <Code className="h-4 w-4 mr-2" />
+                    View API Documentation
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         <div className="max-w-4xl mx-auto">
           <Card className="border-2 bg-primary/5">
             <CardHeader>
@@ -777,17 +817,17 @@ Checked with BIN Checker Pro`
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
                       <Mail className="h-5 w-5 text-primary" />
                     </div>
-                    <span>support@bincheckerpro.com</span>
+                    <span>support@binsapi.vercel.app</span>
                   </div>
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">API Access</h3>
+                <h3 className="text-lg font-medium mb-2">Premium API Access</h3>
                 <p className="text-muted-foreground mb-4">
-                  Integrate our BIN database directly into your applications with our reliable and fast API service.
+                  Need higher rate limits or additional features? Upgrade to our premium API service.
                 </p>
                 <Button className="w-full md:w-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
-                  Learn About Our API
+                  Contact for Premium Access
                 </Button>
               </div>
             </CardContent>
@@ -822,9 +862,11 @@ Checked with BIN Checker Pro`
             <h3 className="font-medium mb-4">Resources</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground">
-                  API Documentation
-                </Button>
+                <Link href="/api/docs">
+                  <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground">
+                    API Documentation
+                  </Button>
+                </Link>
               </li>
               <li>
                 <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground">
