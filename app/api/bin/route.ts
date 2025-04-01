@@ -14,12 +14,30 @@ interface BinData {
   bank_name: string
 }
 
+// Add CORS headers to allow cross-origin requests
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+}
+
+// Handle OPTIONS request for CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders })
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const bin = searchParams.get("bin")
 
   if (!bin) {
-    return NextResponse.json({ error: "BIN parameter is required" }, { status: 400 })
+    return NextResponse.json(
+      { error: "BIN parameter is required" },
+      {
+        status: 400,
+        headers: corsHeaders,
+      },
+    )
   }
 
   try {
@@ -37,13 +55,25 @@ export async function GET(request: NextRequest) {
     const result = records.find((record) => record.number.startsWith(bin))
 
     if (!result) {
-      return NextResponse.json({ error: "BIN not found" }, { status: 404 })
+      return NextResponse.json(
+        { error: "BIN not found" },
+        {
+          status: 404,
+          headers: corsHeaders,
+        },
+      )
     }
 
-    return NextResponse.json(result)
+    return NextResponse.json(result, { headers: corsHeaders })
   } catch (error) {
     console.error("Error processing BIN request:", error)
-    return NextResponse.json({ error: "Failed to process BIN request" }, { status: 500 })
+    return NextResponse.json(
+      { error: "Failed to process BIN request" },
+      {
+        status: 500,
+        headers: corsHeaders,
+      },
+    )
   }
 }
 
