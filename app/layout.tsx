@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://binsapi.vercel.app/og-image.jpg",
+        url: "https://binsapi.vercel.app/image1.png",
         width: 1200,
         height: 630,
         alt: "BIN Checker Pro",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "BIN Checker Pro - Bank Identification Number Lookup Tool",
     description:
       "Verify credit card details with our BIN checker. Get information about card type, issuing bank, country, and more.",
-    images: ["https://binsapi.vercel.app/twitter-image.jpg"],
+    images: ["https://binsapi.vercel.app/image1.png"],
     creator: "@bincheckerpro",
   },
   robots: {
