@@ -817,7 +817,7 @@ Checked with BIN Checker Pro`
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
                       <Mail className="h-5 w-5 text-primary" />
                     </div>
-                    <span>support@binsapi.vercel.app</span>
+                    <span>Join Telegram @drkingbd</span>
                   </div>
                 </div>
               </div>
@@ -827,7 +827,7 @@ Checked with BIN Checker Pro`
                   Need higher rate limits or additional features? Upgrade to our premium API service.
                 </p>
                 <Button className="w-full md:w-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
-                  Contact for Premium Access
+                  https://t.me/drkingbd
                 </Button>
               </div>
             </CardContent>
